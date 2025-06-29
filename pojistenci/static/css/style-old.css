@@ -1,0 +1,57 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* výška celé obrazovky */
+}
+
+nav{
+    width: 100%;
+    height: 50px;
+    background-color: #3e4144;
+    color: white;
+}
+.flex_box{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+}
+.flex_box a{
+    text-decoration: none;
+    color: white;
+}
+.flex_box a:hover{
+    text-decoration: none;
+    color: white;
+}
+.nav_item{
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: red;
+    height: 50px;
+    width: 150px;
+    text-align: center;
+    line-height: 50px;
+    vertical-align: middle;
+    color: white;
+}
+.content{
+    width: 80%;
+    margin: auto;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    flex: 1;
+}
+footer{
+    width: 100%;
+    height: 70px;
+    background-color: red;
+    text-align: center;
+    line-height: 70px;
+    vertical-align: middle;
+}

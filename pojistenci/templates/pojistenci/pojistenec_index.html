@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Seznam pojištěnců:</h4>
+{% for pojistenec in seznam_pojistencu %}
+<a href="{% url 'pojistenec_detail' pojistenec.id %}" class="list_of_items">
+    {{ pojistenec.jmeno }} {{ pojistenec.prijmeni }}
+</a><br>
+{% empty %}
+<p>Žádní pojištěnci nebyli nalezeni.</p>
+{% endfor %}
+<br>
+
+<span class="number_of_pages"> Stránka {{ page_obj.number }} z {{ page_obj.paginator.num_pages }} </span>
+<nav class="flex_box_page">
+    <ul class="pagination">
+        {% if page_obj.number == 1 %}
+        <li><span class="nav_page_item disabled">Začátek</span></li>
+        {% else %}
+        <li><a href="?page={{ page_obj.paginator.start_index }}" class="nav_page_item">Začátek</a></li>
+        {% endif %}
+
+        {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}" class="nav_page_item">Predchozi</a></li>
+        {% else %}
+        <li><span class="nav_page_item disabled">Predchozi</span></li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}" class="nav_page_item">Dalsi</a></li>
+        {% else %}
+        <li><span class="nav_page_item disabled">Dalsi</span></li>
+        {% endif %}
+
+        {% if page_obj.number == page_obj.paginator.num_pages %}
+        <li><span class="nav_page_item disabled">Konec</span></li>
+        {% else %}
+        <li><a href="?page={{ page_obj.paginator.num_pages }}" class="nav_page_item">Konec</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <h4> Pojištěnec: </h4>
+    <div class="boxik">
+        <h4> {{ pojistenec.jmeno }} {{ pojistenec.prijmeni }}<span class="glyphicon glyphicon-erase"></span></h4> 
+        <h5> {{ pojistenec.email }} </h5> 
+        <h5> {{ pojistenec.telefon }} </h5> 
+        <h5> {{ pojistenec.ulice }} {{ pojistenec.cislo }} </h5> 
+        <h5> {{ pojistenec.psc }} {{ pojistenec.mesto }} </h5> <br>
+            <form method="POST">
+                {% csrf_token %}
+                {% if user.is_admin %}
+                <button name="edit" class="btn btn-sm btn-warning btn-block">Upravit pojištěnce</button>
+                <button name="delete" class="btn btn-sm btn-danger btn-block">Smazat pojištěnce</button>{% endif %}
+            </form>
+    </div>
+    <br>
+    <div class="boxik">
+    <h4>Seznam pojištěni:</h4>
+    {% for pojisteni in pojisteni_seznam %}
+        <a href="{% url 'pojisteni_detail' pojisteni.id %}" class="list_of_items">
+             {{ pojisteni.typ }} {{ pojisteni.castka }} {{ pojisteni.predmet_pojisteni }} {{ pojisteni.platnost_od|date:"j. F Y" }} {{ pojisteni.platnost_do }}
+        </a><br>
+    {% empty %}
+        <h5>Žádné pojištění nenalezeno.</h5>
+    {% endfor %}
+    </div>
+
+     
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h4> Pojištěni: </h4>
+<div class="boxik">
+  <h4> {{ pojisteni.predmet_pojisteni }} </h4>
+  <h5> {{ pojisteni.pojistenec.jmeno }} {{ pojisteni.pojistenec.prijmeni }}</h5>
+  <h5> {{ pojisteni.pojistenec.email }} </h5>
+  <h5> {{ pojisteni.typ }} </h5>
+  <h5> {{ pojisteni.castka }} </h5>
+  <h5> {{ pojisteni.platnost_od }} </h5>
+  <h5> {{ pojisteni.platnost_do }} </h5><br>
+  <form method="POST">
+    {% csrf_token %}
+    {% if user.is_admin %}
+    <button name="edit" class="btn btn-sm btn-warning btn-block">Upravit pojištění</button>
+    <button name="delete" class="btn btn-sm btn-danger btn-block">Smazat pojištění</button>{% endif %}
+  </form>
+</div>
+{% endblock %}

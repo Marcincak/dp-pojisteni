@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h4>Pojištěnec</h4>
+<hr>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+       <button type="submit" class="btn btn-sm btn-primary btn-block">Odeslat</button>
+</form>
+{% endblock %}

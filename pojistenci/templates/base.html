@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type = "text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Můj web s pojistenci</title>
+    </head>
+<body>
+
+<header>
+    <div class="flex_box_header">
+        <div class="nav_item_header">ABC POJIŠTĚNÍ</div>
+        <div class="nav_item_header">{{request.user.email}}</div>
+    </div>
+</header>
+
+    <nav>
+        <div class="flex_box">
+            {% if user.is_authenticated %}<div class="nav_item"><a href="{% url 'pojistenec_index' %}">Seznam pojištěnců</a></div>{% endif %}
+            {% if user.is_authenticated %}<div class="nav_item"><a href="{% url 'pojisteni_index' %}">Seznam pojištěni</a></div>{% endif %}
+            {% if user.is_admin %}<div class="nav_item"><a href="{% url 'vytvor_pojistenec' %}">Nový pojištěnec</a></div>{% endif %}
+            {% if user.is_admin %}<div class="nav_item"><a href="{% url 'vytvor_pojisteni' %}">Nové pojištěni</a></div>{% endif %}
+            {% if user.is_admin %}<div class="nav_item"><a href="{% url 'registrace' %}">Registrace uživatele</a></div>{% endif %}
+            {% if user.is_authenticated %}<div class="nav_item nav_item_right"><a href="{% url 'logout' %}">Logout</a></div>{% endif %}
+            {% if not user.is_authenticated %}<div class="nav_item"><a href="{% url 'login' %}">Přihlašení</a></div>{% endif %}
+        </div>
+    </nav>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == "error" %}
+	    <p class="message">Chyba: {{message}}</p>
+        {% elif message.tags == "info" %}
+            <p class="message">Info: {{message}}</p>
+        {% else %}
+            <p class="message">Zpráva: {{message}}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+    <div class="content">
+    {% block content %}
+    {% endblock %}
+    </div>
+    <footer>
+       Designed by: ABC POJISTENI  
+    </footer>
+
+</body>
+</html>

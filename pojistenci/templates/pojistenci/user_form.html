@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+<h4>Registrace nového uživatele</h4>
+<hr>
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+    <section class="login-form">
+
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="container-fluid">
+                {{form|crispy}}
+
+                <button type="submit" class="btn btn-sm btn-primary btn-block" value="Login">Odeslat</button>
+            </div>
+        </form>
+    </section>
+</div>
+
+<div class="col-md-4"></div>
+{% endblock %}

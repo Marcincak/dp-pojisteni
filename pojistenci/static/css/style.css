@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-image: url('/static/pojistenci/body.png');
+    /* cesta k obrázku */
+    background-size: cover;
+    /* roztáhne obrázek přes celou plochu */
+    background-position: center;
+    /* zarovnání obrázku */
+    background-repeat: no-repeat;
+    /* nezopakovat obrázek */
+    background-attachment: fixed;
+    /* obrázek zůstává fixní při scrollování */
+}
+
+.message {
+    text-align: left;
+    padding: 0.5rem;
+    color: white;
+    font-size: 90%;
+}
+
+.list_of_items {
+    color: black;
+}
+
+
+.list_of_items a:hover {
+    color: blue;
+}
+
+
+.boxik {
+    border: 1px solid black;
+    padding: 10px;
+    display: inline-block;
+}
+
+
+.number_of_pages {
+    padding: 0rem 0.4rem;
+}
+
+.flex_box_page {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.1rem 0.2rem;
+    background-color: lightgrey;
+}
+
+
+.nav_page_item {
+    color: black;
+    background-color: lightgrey;
+    text-decoration: none;
+    padding: 0.2rem
+}
+
+.nav_page_item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: lightgrey;
+}
+
+header {
+
+    padding: 0.1rem;
+}
+
+.flex_box_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.1rem 0.2rem;
+}
+
+
+.nav_item_header {
+    color: white;
+    padding: 0.1rem 0.2rem;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+nav {
+    padding: 0.2rem;
+}
+
+.flex_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.nav_item a {
+    background-color: darkred;
+    color: white;
+    padding: 0.1rem 0.4rem;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.nav_item a:hover {
+    background-color: darkred;
+}
+
+.nav_item_right {
+    margin-left: auto;
+    background-color: red;
+}
+
+.content {
+    width: 100%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: lightgrey;
+    padding: 1rem;
+    flex: 1;
+    /* zabere dostupný prostor */
+}
+
+
+footer {
+    color: white;
+    font-style: italic;
+    width: 100%;
+    height: 30px;
+    text-align: right;
+    line-height: 30px;
+    vertical-align: middle;
+    padding-right: 10px;
+}
