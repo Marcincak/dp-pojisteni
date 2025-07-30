@@ -17,6 +17,21 @@ body {
     /* obrázek zůstává fixní při scrollování */
 }
 
+.bg-custom-dark {
+    background-color: #2c2c2c !important; /* tmavě šedá */
+}
+
+h4 {
+    color: #00BFFF;
+}
+.navbar-nav .nav-link {
+    color: #00BFFF !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #dbeafe !important; /* světle modrá při hoveru */
+}
+
 .message {
     text-align: left;
     padding: 0.5rem;
@@ -40,6 +55,11 @@ body {
     display: inline-block;
 }
 
+.boxik-no-border {
+    border: none;
+    padding: 10px;
+    display: inline-block;
+}
 
 .number_of_pages {
     padding: 0rem 0.4rem;
@@ -107,13 +127,8 @@ nav {
     border-radius: 4px;
 }
 
-.nav_item a:hover {
-    background-color: darkred;
-}
-
 .nav_item_right {
     margin-left: auto;
-    background-color: red;
 }
 
 .content {

@@ -1,10 +1,10 @@
-Django projekt pro kurz ITnetwork.
+Django projekt.
 
 HESLA:
 
 Admin pro plný přistup:
-jmeno:   superadmin@pojisteni.cz
-heslo:   nimda
+jmeno:   admin@pojisteni.cz
+heslo:   admin
 
 User pro přístup pro čtění:
 jmeno:    user-reg@pojisteni.cz

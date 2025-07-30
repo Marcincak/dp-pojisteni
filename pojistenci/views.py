@@ -103,7 +103,7 @@ class PojisteniIndex(LoginRequiredMixin, generic.ListView):
 class CurrentPojisteni(generic.DetailView):
 
     model = Pojisteni
-    template_name = "pojistenci/Pojisteni_detail.html"
+    template_name = "pojistenci/pojisteni_detail.html"
 
     def post(self, request, pk):
         if not request.user.is_authenticated:
@@ -332,7 +332,7 @@ class EditPojisteni(LoginRequiredMixin, generic.edit.CreateView):
             pojisteni.typ = typ
             pojisteni.castka = castka
             pojisteni.predmet_pojisteni = predmet_pojisteni
-            pojisteni.platnost_od  = platnost_od 
+            pojisteni.platnost_od  = platnost_od
             pojisteni.platnost_do = platnost_do
             pojisteni.save()
             messages.info(request, "Pojištění bylo změněno.")
