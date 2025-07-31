@@ -1,39 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-    <h4>Seznam pojištěni:</h4>
+    <h4>Seznam pojištěni</h4>
+
     {% for pojisteni in seznam_pojisteni %}
         <a href="{% url 'pojisteni_detail' pojisteni.id %}" class="list_of_items">{{ pojisteni.pojistenec }} {{ pojisteni.typ }} {{ pojisteni.castka }} {{ pojisteni.predmet_pojisteni }} {{ pojisteni.platnost_od }} {{ pojisteni.platnost_do }}<br> </a>
     {% empty %}
         <p>Žádné pojištění nebylo nalezeno.</p>
     {% endfor %}
-<br>
+    <br>
 
-<span> Stránka {{ page_obj.number }} z {{ page_obj.paginator.num_pages }} </span>
-<nav class="flex_box_page">
-    <ul class="pagination">
-        {% if page_obj.number == 1 %}
-        <li><span class="nav_page_item disabled">Začátek</span></li>
-        {% else %}
-        <li><a href="?page={{ page_obj.paginator.start_index }}" class="nav_page_item">Začátek</a></li>
-        {% endif %}
+    <span> Stránka {{ page_obj.number }} z {{ page_obj.paginator.num_pages }} </span>
+    <nav class="flex_box_page">
+        <ul class="pagination">
+            {% if page_obj.number == 1 %}
+            <li><span class="nav_page_item disabled">Začátek</span></li>
+            {% else %}
+            <li><a href="?page={{ page_obj.paginator.start_index }}" class="nav_page_item">Začátek</a></li>
+            {% endif %}
 
-        {% if page_obj.has_previous %}
-        <li><a href="?page={{ page_obj.previous_page_number }}" class="nav_page_item">Predchozi</a></li>
-        {% else %}
-        <li><span class="nav_page_item disabled">Predchozi</span></li>
-        {% endif %}
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="nav_page_item">Predchozi</a></li>
+            {% else %}
+            <li><span class="nav_page_item disabled">Predchozi</span></li>
+            {% endif %}
 
-        {% if page_obj.has_next %}
-        <li><a href="?page={{ page_obj.next_page_number }}" class="nav_page_item">Dalsi</a></li>
-        {% else %}
-        <li><span class="nav_page_item disabled">Dalsi</span></li>
-        {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="nav_page_item">Dalsi</a></li>
+            {% else %}
+            <li><span class="nav_page_item disabled">Dalsi</span></li>
+            {% endif %}
 
-        {% if page_obj.number == page_obj.paginator.num_pages %}
-        <li><span class="nav_page_item disabled">Konec</span></li>
-        {% else %}
-        <li><a href="?page={{ page_obj.paginator.num_pages }}" class="nav_page_item">Konec</a></li>
-        {% endif %}
-    </ul>
-</nav>
+            {% if page_obj.number == page_obj.paginator.num_pages %}
+            <li><span class="nav_page_item disabled">Konec</span></li>
+            {% else %}
+            <li><a href="?page={{ page_obj.paginator.num_pages }}" class="nav_page_item">Konec</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <form method="get" action="{% url 'pojisteni_search' %}">
+        <input type="text" name="q" value="{{ query }}" placeholder="Hledat pojisteni...">
+        <button type="submit">Hledat</button>
+    </form>
 {% endblock %}

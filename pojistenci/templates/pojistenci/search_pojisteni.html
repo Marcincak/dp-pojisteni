@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<h4>Nalezení pojištěnci</h4>
+    <h4>Nalezené pojištění</h4>
 
     {% if query %}
         <p>Hledaný výraz: {{ query }}</p>
     {% endif %}
 
-    {% for pojistenec in results %}
-    <a href="{% url 'pojistenec_detail' pojistenec.id %}" class="list_of_items">
-        {{ pojistenec.jmeno }} {{ pojistenec.prijmeni }}
+    {% for pojisteni in results %}
+    <a href="{% url 'pojisteni_detail' pojisteni.id %}" class="list_of_items">
+         {{ pojisteni.predmet_pojisteni }} : {{ pojisteni.castka }} : {{ pojisteni.pojistenec.jmeno }} {{ pojisteni.pojistenec.prijmeni  }}
     </a><br>
     {% empty %}
-    <p>Žádní pojištěnci nebyli nalezeni.</p>
+    <p>Žádné pojištění nebylo nalezeno.</p>
     {% endfor %}
     <br>
 
@@ -44,7 +44,8 @@
         </ul>
     </nav>
     <form method="get">
-        <input type="text" name="q" placeholder="Hledat pojistence...">
+        <input type="text" name="q" placeholder="Hledat pojisteni...">
         <button type="submit">Hledat</button>
     </form>
+
 {% endblock %}

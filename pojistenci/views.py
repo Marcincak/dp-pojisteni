@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.auth import login, logout, authenticate
-from .models import Pojistenec, Pojisteni, Uzivatel
+from .models import Pojistenec, Pojisteni, Uzivatel, telefon_validator
 from .forms import PojistenecForm, PojisteniForm, LoginForm, UzivatelForm
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -28,7 +28,14 @@ class PojistenecSearch(LoginRequiredMixin, generic.ListView):
         queryset = Pojistenec.objects.all()
         if q:
             queryset = queryset.filter(
-                Q(jmeno__icontains=q) | Q(prijmeni__icontains=q)
+                Q(jmeno__icontains=q) |
+                Q(prijmeni__icontains=q) |
+                Q(email__icontains=q) |
+                Q(telefon__icontains=q) |
+                Q(ulice__icontains=q) |
+                Q(cislo__icontains=q) |
+                Q(mesto__icontains=q) |
+                Q(psc__icontains=q)
             )
         return queryset
 
@@ -110,7 +117,6 @@ class CreatePojistenec(LoginRequiredMixin, generic.edit.CreateView):
         return render(request, self.template_name, {"form": form})
 
 
-
 class PojisteniIndex(LoginRequiredMixin, generic.ListView):
 
     template_name = "pojistenci/pojisteni_index.html"  # cesta k šabloně ze složky templates (je možné sdílet mezi aplikacemi)
@@ -121,6 +127,31 @@ class PojisteniIndex(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return Pojisteni.objects.all().order_by("-id")
 
+class PojisteniSearch(LoginRequiredMixin, generic.ListView):
+    model = Pojisteni
+    template_name = "pojistenci/search_pojisteni.html"  # cesta k šabloně ze složky templates (je možné sdílet mezi aplikacemi)
+    context_object_name = "results"
+    paginate_by = 10
+
+    def get_queryset(self):
+        q = self.request.GET.get("q", "")
+        queryset = Pojisteni.objects.all()
+        if q:
+            queryset = queryset.filter(
+                Q(pojistenec__jmeno__icontains=q) |
+                Q(pojistenec__prijmeni__icontains=q) |
+                Q(predmet_pojisteni__icontains=q) |
+                Q(typ__icontains=q) |
+                Q(castka__icontains=q)
+            )
+        return queryset
+
+    # tato metoda nám získává seznam nalezených Pojisteni
+    def get_context_data(self, **kwargs):
+        # přidáme query do kontextu, aby se zobrazilo zpět v inputu
+        context = super().get_context_data(**kwargs)
+        context["query"] = self.request.GET.get("q", "")
+        return context
 
 class CurrentPojisteni(generic.DetailView):
 

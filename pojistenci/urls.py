@@ -8,6 +8,7 @@ urlpatterns = [
     path("<int:pk>/pojistenec_detail/", views.CurrentPojistenec.as_view(), name="pojistenec_detail"),
     path("vytvor_pojistenec/", views.CreatePojistenec.as_view(), name="vytvor_pojistenec"),
     path("pojisteni_index/", views.PojisteniIndex.as_view(), name="pojisteni_index"),
+    path("pojisteni_search/", views.PojisteniSearch.as_view(), name="pojisteni_search"),
     path("<int:pk>/pojisteni_detail/", views.CurrentPojisteni.as_view(), name="pojisteni_detail"),
     path("vytvor_pojisteni/", views.CreatePojisteni.as_view(), name="vytvor_pojisteni"),
     path("<int:pk>/edit/", views.EditPojistenec.as_view(), name="edit_pojistenec"),
