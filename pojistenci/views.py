@@ -5,6 +5,7 @@ from .models import Pojistenec, Pojisteni, Uzivatel
 from .forms import PojistenecForm, PojisteniForm, LoginForm, UzivatelForm
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 class PojistenecIndex(LoginRequiredMixin, generic.ListView):
     model = Pojistenec
@@ -15,6 +16,28 @@ class PojistenecIndex(LoginRequiredMixin, generic.ListView):
     # tato metoda nám získává seznam Pojistenu seřazených od největšího id (9,8,7...)
     def get_queryset(self):
         return Pojistenec.objects.all().order_by("-id")
+
+class PojistenecSearch(LoginRequiredMixin, generic.ListView):
+    model = Pojistenec
+    template_name = "pojistenci/search_pojistenec.html"  # cesta k šabloně ze složky templates (je možné sdílet mezi aplikacemi)
+    context_object_name = "results"
+    paginate_by = 10
+
+    def get_queryset(self):
+        q = self.request.GET.get("q", "")
+        queryset = Pojistenec.objects.all()
+        if q:
+            queryset = queryset.filter(
+                Q(jmeno__icontains=q) | Q(prijmeni__icontains=q)
+            )
+        return queryset
+
+    # tato metoda nám získává seznam nalezených Pojistenu
+    def get_context_data(self, **kwargs):
+        # přidáme query do kontextu, aby se zobrazilo zpět v inputu
+        context = super().get_context_data(**kwargs)
+        context["query"] = self.request.GET.get("q", "")
+        return context
 
 
 class CurrentPojistenec(generic.DetailView):
@@ -52,7 +75,6 @@ class CurrentPojistenec(generic.DetailView):
                     self.get_object().delete()
                     messages.info(request, "Pojištěnec byl smazán.")
         return redirect("pojistenec_index")
-
 
 class CreatePojistenec(LoginRequiredMixin, generic.edit.CreateView):
 

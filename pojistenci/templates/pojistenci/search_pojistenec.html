@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<h4>Seznam pojištěnců:</h4>
-{% for pojistenec in seznam_pojistencu %}
+<h4>Nalezení pojištěnci:</h4>
+
+
+{% for pojistenec in results %}
 <a href="{% url 'pojistenec_detail' pojistenec.id %}" class="list_of_items">
     {{ pojistenec.jmeno }} {{ pojistenec.prijmeni }}
 </a><br>
@@ -38,10 +40,9 @@
         {% endif %}
     </ul>
 </nav>
-
-<form method="get" action="{% url 'pojistenec_search' %}">
-    <input type="text" name="q" value="{{ query }}" placeholder="Hledat pojistence...">
+<form method="get">
+    <input type="text" name="q" placeholder="Hledat pojistence...">
     <button type="submit">Hledat</button>
 </form>
-
+<br>
 {% endblock %}

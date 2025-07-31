@@ -4,6 +4,7 @@ from . import url_handlers
 
 urlpatterns = [
     path("pojistenec_index/", views.PojistenecIndex.as_view(), name="pojistenec_index"),
+    path("pojistenec_search/", views.PojistenecSearch.as_view(), name="pojistenec_search"),
     path("<int:pk>/pojistenec_detail/", views.CurrentPojistenec.as_view(), name="pojistenec_detail"),
     path("vytvor_pojistenec/", views.CreatePojistenec.as_view(), name="vytvor_pojistenec"),
     path("pojisteni_index/", views.PojisteniIndex.as_view(), name="pojisteni_index"),
