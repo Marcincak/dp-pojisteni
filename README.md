@@ -1,6 +1,8 @@
-Django projekt.
+Python web projekt.
+Vyukový projekt, použité technologie jsou Django, JavaScript, CSS.
 
-HESLA:
+
+Volne přístupné hesla pouzité v projektu:
 
 Admin pro plný přistup:
 jmeno:   admin@pojisteni.cz
